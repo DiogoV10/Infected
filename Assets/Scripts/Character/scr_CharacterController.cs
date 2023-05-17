@@ -49,6 +49,8 @@ public class scr_CharacterController : MonoBehaviour
 
     private void Awake()
     {
+        HideCursor();
+
         defaultInput = new DefaultInput();
 
         defaultInput.Character.Movement.performed += e => input_Movement = e.ReadValue<Vector2>();
@@ -62,6 +64,11 @@ public class scr_CharacterController : MonoBehaviour
         newCharacterRotation = transform.localRotation.eulerAngles;
 
         characterController = GetComponent<CharacterController>();
+    }
+    private void HideCursor()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Start is called before the first frame update
@@ -93,10 +100,36 @@ public class scr_CharacterController : MonoBehaviour
         }
         else
         {
-            CalculateView();
-            CalculateMovement();
             CalculateAnimation();
             CalculateJump();
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (anim.enabled == false) return;
+
+        if (Time.deltaTime > 0.1f)
+        {
+            return;
+        }
+        else
+        {
+            CalculateMovement();
+        }
+    }
+
+    private void LateUpdate()
+    {
+        if (anim.enabled == false) return;
+
+        if (Time.deltaTime > 0.1f)
+        {
+            return;
+        }
+        else
+        {
+            CalculateView();
         }
     }
 
@@ -106,10 +139,10 @@ public class scr_CharacterController : MonoBehaviour
 
         camera.position = cameraRoot.position;
 
-        newCharacterRotation.y += playerSettings.ViewXSensitivity * (playerSettings.ViewXInverted ? -input_View.x : input_View.x) * Time.deltaTime;
+        newCharacterRotation.y += playerSettings.ViewXSensitivity * (playerSettings.ViewXInverted ? -input_View.x : input_View.x) * Time.smoothDeltaTime;
         transform.localRotation = Quaternion.Euler(newCharacterRotation);
 
-        newCameraRotation.x += playerSettings.ViewYSensitivity * (playerSettings.ViewYInverted ? input_View.y : -input_View.y) * Time.deltaTime;
+        newCameraRotation.x += playerSettings.ViewYSensitivity * (playerSettings.ViewYInverted ? input_View.y : -input_View.y) * Time.smoothDeltaTime;
         newCameraRotation.x = Mathf.Clamp(newCameraRotation.x, viewClampYMin, viewClampYMax);
 
         camera.localRotation = Quaternion.Euler(newCameraRotation);
@@ -119,15 +152,15 @@ public class scr_CharacterController : MonoBehaviour
     {
         if (!has_Animator) return;
 
-        var verticalSpeed = playerSettings.WalkingForwardSpeed * input_Movement.y * Time.deltaTime;
-        var horizontalSpeed = playerSettings.WalkingStrafeSpeed * input_Movement.x * Time.deltaTime;
+        var verticalSpeed = playerSettings.WalkingForwardSpeed * input_Movement.y * Time.fixedDeltaTime;
+        var horizontalSpeed = playerSettings.WalkingStrafeSpeed * input_Movement.x * Time.fixedDeltaTime;
 
         var newMovementSpeed = new Vector3(horizontalSpeed, 0, verticalSpeed);
         newMovementSpeed = transform.TransformDirection(newMovementSpeed);
 
         if (playerGravity > gravityMin)
         {
-            playerGravity -= gravity * Time.deltaTime;
+            playerGravity -= gravity * Time.fixedDeltaTime;
         }
 
         if (playerGravity < -0.1 && characterController.isGrounded)
@@ -136,7 +169,7 @@ public class scr_CharacterController : MonoBehaviour
         }
 
         newMovementSpeed.y += playerGravity;
-        newMovementSpeed += jumpingForce * Time.deltaTime;
+        newMovementSpeed += jumpingForce * Time.fixedDeltaTime;
 
         characterController.Move(newMovementSpeed);
     }
