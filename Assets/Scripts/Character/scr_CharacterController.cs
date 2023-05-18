@@ -21,6 +21,7 @@ public class scr_CharacterController : MonoBehaviour
 
     private bool has_Animator;
     private bool grounded;
+    private bool crouched;
 
     private int xVelHash;
     private int yVelHash;
@@ -28,6 +29,7 @@ public class scr_CharacterController : MonoBehaviour
     private int jumpHash;
     private int groundHash;
     private int fallingHash;
+    private int crouchHash;
 
     [Header("References")]
     public Transform cameraRoot;
@@ -47,6 +49,9 @@ public class scr_CharacterController : MonoBehaviour
     public Vector3 jumpingForce;
     private Vector3 jumpingForceVelocity;
 
+    [Header("Stance")]
+    public PlayerStance playerStance;
+
     private void Awake()
     {
         HideCursor();
@@ -56,6 +61,7 @@ public class scr_CharacterController : MonoBehaviour
         defaultInput.Character.Movement.performed += e => input_Movement = e.ReadValue<Vector2>();
         defaultInput.Character.View.performed += e => input_View = e.ReadValue<Vector2>();
         defaultInput.Character.Jump.performed += e => Jump();
+        defaultInput.Character.Crouch.performed += e => Crouch();
         defaultInput.AniMove.Movement.performed += e => input_AniMove = e.ReadValue<Vector2>();
 
         defaultInput.Enable();
@@ -82,6 +88,7 @@ public class scr_CharacterController : MonoBehaviour
         jumpHash = Animator.StringToHash("Jump");
         groundHash = Animator.StringToHash("Grounded");
         fallingHash = Animator.StringToHash("Falling");
+        crouchHash = Animator.StringToHash("Crouch");
 
         ragdollRigids = new List<Rigidbody>(transform.GetComponentsInChildren<Rigidbody>());
         ragdollRigids.Remove(GetComponent<Rigidbody>());
@@ -152,6 +159,18 @@ public class scr_CharacterController : MonoBehaviour
     {
         if (!has_Animator) return;
 
+        if (crouched)
+        {
+            playerSettings.WalkingBackwardSpeed = 1.5f;
+            playerSettings.WalkingStrafeSpeed = 1.5f;
+            playerSettings.WalkingForwardSpeed = 1.5f;
+        }else if (!crouched)
+        {
+            playerSettings.WalkingBackwardSpeed = 5f;
+            playerSettings.WalkingStrafeSpeed = 5f;
+            playerSettings.WalkingForwardSpeed = 5f;
+        }
+
         var verticalSpeed = playerSettings.WalkingForwardSpeed * input_Movement.y * Time.fixedDeltaTime;
         var horizontalSpeed = playerSettings.WalkingStrafeSpeed * input_Movement.x * Time.fixedDeltaTime;
 
@@ -202,6 +221,20 @@ public class scr_CharacterController : MonoBehaviour
         anim.ResetTrigger(jumpHash);
     }
 
+    private void Crouch()
+    {
+        if (playerStance == PlayerStance.Crouch)
+        {
+            crouched = false;
+            playerStance = PlayerStance.Stand;
+        }
+        else
+        {
+            crouched = true;
+            playerStance = PlayerStance.Crouch;
+        }
+    }
+
     private void CalculateAnimation()
     {
         if (!has_Animator) return;
@@ -221,6 +254,8 @@ public class scr_CharacterController : MonoBehaviour
 
         anim.SetBool(fallingHash, !grounded);
         anim.SetBool(groundHash, grounded);
+
+        anim.SetBool(crouchHash, crouched);
     }
 
     void ActivateRagdoll()
