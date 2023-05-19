@@ -40,6 +40,8 @@ public class scr_CharacterController : MonoBehaviour
     [SerializeField] public float viewClampYMin = -70;
     [SerializeField] public float viewClampYMax = 80;
     [SerializeField] private float animBlendSpeed = 0.1f;
+    //[SerializeField] private float rotationThreshold = 45f;
+    //[SerializeField] private float rotationSpeed = 5;
 
     [Header("Gravity")]
     public float gravity;
@@ -148,6 +150,22 @@ public class scr_CharacterController : MonoBehaviour
 
         newCharacterRotation.y += playerSettings.ViewXSensitivity * (playerSettings.ViewXInverted ? -input_View.x : input_View.x) * Time.smoothDeltaTime;
         transform.localRotation = Quaternion.Euler(newCharacterRotation);
+
+        //float cameraRotationY = camera.localRotation.eulerAngles.y;
+        //float characterRotationY = transform.localRotation.eulerAngles.y;
+
+        //if (Mathf.Abs(cameraRotationY) > rotationThreshold &&
+        //    Mathf.Abs(cameraRotationY - 360f) > rotationThreshold)
+        //{
+        //    newCameraRotation.y = 0;
+
+        //    Quaternion targetRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, characterRotationY + rotationThreshold, transform.localRotation.eulerAngles.z);
+        //    transform.localRotation = Quaternion.Lerp(transform.localRotation, targetRotation, rotationSpeed * Time.deltaTime);
+        //}
+        //else
+        //{
+        //    newCameraRotation.y += playerSettings.ViewXSensitivity * (playerSettings.ViewXInverted ? -input_View.x : input_View.x) * Time.smoothDeltaTime;
+        //}
 
         newCameraRotation.x += playerSettings.ViewYSensitivity * (playerSettings.ViewYInverted ? input_View.y : -input_View.y) * Time.smoothDeltaTime;
         newCameraRotation.x = Mathf.Clamp(newCameraRotation.x, viewClampYMin, viewClampYMax);
