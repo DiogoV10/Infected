@@ -8,7 +8,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <ProjectGuid>{126B87F6-1DFB-1966-D307-DC3D8F844DA8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -136,10 +137,10 @@
     <Compile Include="Library\PackageCache\com.unity.visualscripting@1.8.0\Runtime\VisualScripting.Core\Utilities\ComponentHolderProtocol.cs" />
     <Compile Include="Library\PackageCache\com.unity.visualscripting@1.8.0\Runtime\VisualScripting.Core\Dependencies\FullSerializer\Converters\Unity\UnityEvent_Converter.cs" />
     <Compile Include="Library\PackageCache\com.unity.visualscripting@1.8.0\Runtime\VisualScripting.Core\Dependencies\FullSerializer\Internal\fsVersionedType.cs" />
-    <Compile Include="Library\PackageCache\com.unity.visualscripting@1.8.0\Runtime\VisualScripting.Core\Reflection\RenamedAssemblyAttribute.cs" />
     <Compile Include="Library\PackageCache\com.unity.visualscripting@1.8.0\Runtime\VisualScripting.Core\Listeners\UI\UnityOnButtonClickMessageListener.cs" />
-    <Compile Include="Library\PackageCache\com.unity.visualscripting@1.8.0\Runtime\VisualScripting.Core\Listeners\UI\UnityOnInputFieldEndEditMessageListener.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualscripting@1.8.0\Runtime\VisualScripting.Core\Reflection\RenamedAssemblyAttribute.cs" />
     <Compile Include="Library\PackageCache\com.unity.visualscripting@1.8.0\Runtime\VisualScripting.Core\Dependencies\FullSerializer\fsObjectProcessor.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualscripting@1.8.0\Runtime\VisualScripting.Core\Listeners\UI\UnityOnInputFieldEndEditMessageListener.cs" />
     <Compile Include="Library\PackageCache\com.unity.visualscripting@1.8.0\Runtime\VisualScripting.Core\Reflection\Optimization\StaticFunctionInvoker_3.cs" />
     <Compile Include="Library\PackageCache\com.unity.visualscripting@1.8.0\Runtime\VisualScripting.Core\Events\EmptyEventArgs.cs" />
     <Compile Include="Library\PackageCache\com.unity.visualscripting@1.8.0\Runtime\VisualScripting.Core\Reflection\Optimization\InstanceFunctionInvoker_1.cs" />
@@ -689,9 +690,6 @@
     <Reference Include="UnityEngine.XRModule">
       <HintPath>D:\Program Files\Unity\Hub\Editor\2021.3.21f1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\Variations\mono\Managed\UnityEngine.XRModule.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
-      <HintPath>Library\PackageCache\com.unity.visualscripting@1.8.0\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Burst.Unsafe">
       <HintPath>Library\PackageCache\com.unity.burst@1.6.6\Unity.Burst.Unsafe.dll</HintPath>
     </Reference>
@@ -706,6 +704,9 @@
     </Reference>
     <Reference Include="Unity.Burst.Cecil.Rocks">
       <HintPath>Library\PackageCache\com.unity.burst@1.6.6\Unity.Burst.CodeGen\Unity.Burst.Cecil.Rocks.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
+      <HintPath>Library\PackageCache\com.unity.visualscripting@1.8.0\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>D:\Program Files\Unity\Hub\Editor\2021.3.21f1\Editor\Data\NetStandard\ref\2.1.0\netstandard.dll</HintPath>

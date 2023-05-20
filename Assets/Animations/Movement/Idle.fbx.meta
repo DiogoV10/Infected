@@ -16,7 +16,8 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 1
     motionNodeName: 
-    rigImportErrors: 
+    rigImportErrors: "Copied Avatar Rig Configuration mis-match. Transform hierarchy
+      does not match:\n\tTransform 'pelvis' for human bone 'Hips' not found\n"
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
@@ -526,13 +527,13 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: X Bot@T-Pose(Clone)
+    - name: T-Pose(Clone)
       parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:Hips
-      parentName: X Bot@T-Pose(Clone)
+      parentName: T-Pose(Clone)
       position: {x: -0.00000006394334, y: 1.0427046, z: 0.01554256}
       rotation: {x: 0.006458546, y: -0.000000017584803, z: 0.0000007343956, w: 0.99997914}
       scale: {x: 1, y: 1, z: 1}

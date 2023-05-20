@@ -8,7 +8,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <ProjectGuid>{7FF4EB11-7CC9-6514-0799-8A5A5B0E7E57}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -169,6 +170,7 @@
     <Compile Include="Library\PackageCache\com.unity.test-framework@1.1.31\UnityEngine.TestRunner\NUnitExtensions\Runner\DefaultTestWorkItem.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".editorconfig" />
     <None Include="Library\PackageCache\com.unity.test-framework@1.1.31\UnityEngine.TestRunner\UnityEngine.TestRunner.asmdef" />
   </ItemGroup>
   <ItemGroup>
