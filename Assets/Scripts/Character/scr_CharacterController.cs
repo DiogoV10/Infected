@@ -20,6 +20,8 @@ public class scr_CharacterController : MonoBehaviour
 
     private Vector3 newCameraRotation;
     private Vector3 newCharacterRotation;
+    private Vector3 newMovementSpeed;
+    private Vector3 newMovementSpeedVelocity;
     private Vector2 currentVelocity;
 
     private bool has_Animator;
@@ -211,18 +213,6 @@ public class scr_CharacterController : MonoBehaviour
     {
         if (!has_Animator) return;
 
-        if (crouched)
-        {
-            playerSettings.WalkingBackwardSpeed = 1.5f;
-            playerSettings.WalkingStrafeSpeed = 1.5f;
-            playerSettings.WalkingForwardSpeed = 1.5f;
-        }else if (!crouched)
-        {
-            playerSettings.WalkingBackwardSpeed = 5f;
-            playerSettings.WalkingStrafeSpeed = 5f;
-            playerSettings.WalkingForwardSpeed = 5f;
-        }
-
         if (input_Movement.y <= 0.2f)
         {
             sprinting = false;
@@ -237,8 +227,24 @@ public class scr_CharacterController : MonoBehaviour
             horizontalSpeed = playerSettings.RunningStrafeSpeed;
         }
 
-        var newMovementSpeed = new Vector3(horizontalSpeed * input_Movement.x * Time.fixedDeltaTime, 0, verticalSpeed * input_Movement.y * Time.fixedDeltaTime);
-        newMovementSpeed = transform.TransformDirection(newMovementSpeed);
+        if (!grounded)
+        {
+            playerSettings.SpeedEffector = playerSettings.FallingSpeedEffector;
+        }
+        else if (crouched)
+        {
+            playerSettings.SpeedEffector = playerSettings.CrouchSpeedEffector;
+        }
+        else
+        {
+            playerSettings.SpeedEffector = 1;
+        }
+
+        verticalSpeed *= playerSettings.SpeedEffector;
+        horizontalSpeed *= playerSettings.SpeedEffector;
+
+        newMovementSpeed = Vector3.SmoothDamp(newMovementSpeed, new Vector3(horizontalSpeed * input_Movement.x * Time.fixedDeltaTime, 0, verticalSpeed * input_Movement.y * Time.fixedDeltaTime), ref newMovementSpeedVelocity, grounded ? playerSettings.MovementSmoothing : playerSettings.FallingSmoothing);
+        var movementSpeed = transform.TransformDirection(newMovementSpeed);
 
         if (playerGravity > gravityMin)
         {
@@ -250,10 +256,10 @@ public class scr_CharacterController : MonoBehaviour
             playerGravity = -0.1f;
         }
 
-        newMovementSpeed.y += playerGravity;
-        newMovementSpeed += jumpingForce * Time.fixedDeltaTime;
+        movementSpeed.y += playerGravity;
+        movementSpeed += jumpingForce * Time.fixedDeltaTime;
 
-        characterController.Move(newMovementSpeed);
+        characterController.Move(movementSpeed);
     }
 
     private void CalculateStance()

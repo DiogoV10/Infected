@@ -10210,14 +10210,19 @@ MonoBehaviour:
     ViewYSensitivity: 20
     ViewXInverted: 0
     ViewYInverted: 0
-    HoldSprint: 0
+    HoldSprint: 1
+    MovementSmoothing: 0.1
     RunningForwardSpeed: 10
-    RunningStrafeSpeed: 10
+    RunningStrafeSpeed: 8
     WalkingForwardSpeed: 5
     WalkingBackwardSpeed: 5
-    WalkingStrafeSpeed: 5
-    JumpingHeight: 15
-    JumpingFalloff: 0.12
+    WalkingStrafeSpeed: 4
+    JumpingHeight: 8
+    JumpingFalloff: 0.4
+    FallingSmoothing: 0.4
+    SpeedEffector: 1
+    CrouchSpeedEffector: 0.3
+    FallingSpeedEffector: 0.6
   standViewClampYMin: -70
   crouchViewClampYMin: 5
   viewClampYMax: 80
@@ -10226,7 +10231,7 @@ MonoBehaviour:
   playerMask:
     serializedVersion: 2
     m_Bits: 1143
-  gravity: 0.12
+  gravity: 0.03
   gravityMin: -2
   jumpingForce: {x: 0, y: 0, z: 0}
   playerStance: 0
