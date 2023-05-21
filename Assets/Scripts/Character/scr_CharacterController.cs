@@ -28,6 +28,8 @@ public class scr_CharacterController : MonoBehaviour
     private bool grounded;
     private bool crouched;
     private bool sprinting;
+    private bool hardLand;
+    private bool landed;
 
     private int xVelHash;
     private int yVelHash;
@@ -47,7 +49,8 @@ public class scr_CharacterController : MonoBehaviour
     [Header("Settings")]
     public PlayerSettingsModel playerSettings;
     [SerializeField] public float standViewClampYMin = -70;
-    [SerializeField] public float crouchViewClampYMin = -35;
+    [SerializeField] public float crouchViewClampYMin = 5;
+    [SerializeField] public float hardLandViewClampYMin = 70;
     [SerializeField] public float viewClampYMax = 80;
     [SerializeField] public float viewClampSmoothing = 10;
     [SerializeField] private float animBlendSpeed = 0.1f;
@@ -177,6 +180,10 @@ public class scr_CharacterController : MonoBehaviour
         {
             targetViewClampYMin = crouchViewClampYMin;
         }
+        else if (hardLand && landed)
+        {
+            targetViewClampYMin = hardLandViewClampYMin;
+        }
         else
         {
             targetViewClampYMin = standViewClampYMin;
@@ -212,6 +219,13 @@ public class scr_CharacterController : MonoBehaviour
     private void CalculateMovement()
     {
         if (!has_Animator) return;
+
+        if (hardLand && landed) return;
+
+        if (characterController.velocity.y <= -10)
+        {
+            hardLand = true;
+        }
 
         if (input_Movement.y <= 0.2f)
         {
@@ -310,6 +324,17 @@ public class scr_CharacterController : MonoBehaviour
     {
         jumpingForce = Vector3.up * playerSettings.JumpingHeight;
         anim.ResetTrigger(jumpHash);
+    }
+
+    public void Landed()
+    {
+        hardLand = false;
+        landed = false;
+    }
+
+    public void Landing()
+    {
+        landed = true;
     }
 
     private void Crouch()

@@ -10225,6 +10225,7 @@ MonoBehaviour:
     FallingSpeedEffector: 0.6
   standViewClampYMin: -70
   crouchViewClampYMin: 5
+  hardLandViewClampYMin: 70
   viewClampYMax: 80
   viewClampSmoothing: 10
   animBlendSpeed: 0.1
