@@ -18,6 +18,7 @@ public class scr_CharacterController : MonoBehaviour
     private Vector2 input_View;
     private Vector2 input_AniMove;
 
+    private Vector3 wallRunDirection;
     private Vector3 newCameraRotation;
     private Vector3 newCharacterRotation;
     private Vector3 newMovementSpeed;
@@ -31,6 +32,8 @@ public class scr_CharacterController : MonoBehaviour
     private bool sprinting;
     private bool hardLand;
     private bool landed;
+    private bool sliding;
+    public bool wallRunning;
 
     private int xVelHash;
     private int yVelHash;
@@ -39,9 +42,13 @@ public class scr_CharacterController : MonoBehaviour
     private int groundHash;
     private int fallingHash;
     private int crouchHash;
+    private int slideHash;
 
     private float viewClampYMin;
     private float fallTimer;
+    private float slideTimer;
+    private float slideTimerCooldown;
+    private float wallRunTimer;
 
 
     [Header("References")]
@@ -76,6 +83,7 @@ public class scr_CharacterController : MonoBehaviour
     public float playerStanceSmoothing;
     public CharacterStance playerStandStance;
     public CharacterStance playerCrouchStance;
+    public CharacterStance playerSlideStance;
     private float stanceCheckErrorMargin = 0.05f;
 
     private Vector3 stanceCapsuleCenterVelocity;
@@ -93,6 +101,7 @@ public class scr_CharacterController : MonoBehaviour
         defaultInput.Character.Crouch.performed += e => Crouch();
         defaultInput.Character.Sprint.performed += e => ToggleSprint();
         defaultInput.Character.SprintReleased.performed += e => StopSprint();
+        defaultInput.Character.Slide.performed += e => Slide();
         defaultInput.AniMove.Movement.performed += e => input_AniMove = e.ReadValue<Vector2>();
 
         defaultInput.Enable();
@@ -121,6 +130,7 @@ public class scr_CharacterController : MonoBehaviour
         groundHash = Animator.StringToHash("Grounded");
         fallingHash = Animator.StringToHash("Falling");
         crouchHash = Animator.StringToHash("Crouch");
+        slideHash = Animator.StringToHash("Slide");
 
         ragdollRigids = new List<Rigidbody>(transform.GetComponentsInChildren<Rigidbody>());
         ragdollRigids.Remove(GetComponent<Rigidbody>());
@@ -142,6 +152,8 @@ public class scr_CharacterController : MonoBehaviour
             CalculateAnimation();
             CalculateJump();
             CalculateStance();
+            UpdateSlideCooldown();
+            CalculateWallRun();
         }
     }
 
@@ -153,6 +165,20 @@ public class scr_CharacterController : MonoBehaviour
         {
             return;
         }
+        else if (wallRunning)
+        {
+            // Apply wallrun movement
+            Vector3 wallRunMovement = wallRunDirection * playerSettings.WallRunningSpeed;
+            characterController.Move(wallRunMovement * Time.fixedDeltaTime);
+
+            // Apply wallrun gravity
+            playerGravity = -playerSettings.WallRunningGravity;
+        }
+        else if (sliding)
+        {
+            CalculateSlide();
+            TrackFalling();
+        }
         else
         {
             CalculateMovement();
@@ -162,12 +188,15 @@ public class scr_CharacterController : MonoBehaviour
 
     private void TrackFalling()
     {
+        if (!has_Animator) return;
+
         if (characterController.isGrounded)
         {
             fallTimer = 0f;
         }
         else if (wasGrounded)
         {
+
             fallTimer = 0f;
         }
         else
@@ -308,6 +337,10 @@ public class scr_CharacterController : MonoBehaviour
         {
             currentStance = playerCrouchStance;
         }
+        else if (playerStance == PlayerStance.Slide)
+        {
+            currentStance = playerSlideStance;
+        }
 
         characterController.height = Mathf.SmoothDamp(characterController.height, currentStance.StanceCollider.height, ref stanceCapsuleHeightVelocity, playerStanceSmoothing);
         characterController.center = Vector3.SmoothDamp(characterController.center, currentStance.StanceCollider.center, ref stanceCapsuleCenterVelocity, playerStanceSmoothing);
@@ -338,6 +371,12 @@ public class scr_CharacterController : MonoBehaviour
             return;
         }
 
+        if (wallRunning)
+        {
+            JumpOffWall();
+            return;
+        }
+
         anim.SetTrigger(jumpHash);
         jumpingForce = Vector3.up * playerSettings.JumpingHeight;
         playerGravity = 0;
@@ -363,6 +402,8 @@ public class scr_CharacterController : MonoBehaviour
 
     private void Crouch()
     {
+        if (sliding) return;
+
         if (playerStance == PlayerStance.Crouch)
         {
             if (StanceCheck(playerStandStance.StanceCollider.height))
@@ -406,6 +447,127 @@ public class scr_CharacterController : MonoBehaviour
         }
     }
 
+    private void Slide()
+    {
+        if (!sliding && slideTimerCooldown <= 0 && sprinting && !crouched && grounded)
+        {
+            playerStance = PlayerStance.Slide;
+            StartSlide();
+        }
+    }
+
+    private void StartSlide()
+    {
+        sliding = true;
+        slideTimer = 0.0f;
+    }
+
+    private void UpdateSlideCooldown()
+    {
+        if (slideTimerCooldown > 0)
+        {
+            slideTimerCooldown -= Time.deltaTime;
+        }
+        else if (slideTimerCooldown <= 0 && defaultInput.Character.Slide.triggered)
+        {
+            slideTimerCooldown = playerSettings.SlidingCooldown;
+        }
+    }
+
+    private void CalculateSlide()
+    {
+        var slideMovementSpeed = transform.TransformDirection(Vector3.forward) * playerSettings.SlidingSpeed * Time.fixedDeltaTime;
+        characterController.Move(slideMovementSpeed);
+
+        slideTimer += Time.fixedDeltaTime;
+        if (slideTimer >= playerSettings.SlidingDuration)
+        {
+            StopSlide();
+        }
+    }
+
+    private void StopSlide()
+    {
+        sliding = false;
+        slideTimerCooldown = playerSettings.SlidingCooldown;
+
+        if (StanceCheck(playerStandStance.StanceCollider.height))
+        {
+            Crouch();
+        }
+        else
+        {
+            playerStance = PlayerStance.Stand;
+        }
+    }
+
+    private void CalculateWallRun()
+    {
+        if (wallRunning)
+        {
+            wallRunTimer -= Time.deltaTime;
+            if (wallRunTimer <= 0f)
+            {
+                // Stop wallrunning
+                wallRunning = false;
+            }
+        }
+        else
+        {
+            // Check for wallrun input
+            if (!grounded)
+            {
+                if (DetectWall(out wallRunDirection))
+                {
+                    // Start wallrunning
+                    wallRunning = true;
+                    wallRunTimer = playerSettings.WallRunningDuration;
+                    characterController.enabled = false; // Disable character controller to allow free movement along the wall
+                }
+            }
+        }
+    }
+
+    private bool DetectWall(out Vector3 wallNormal)
+    {
+        float rayDistance = 1.0f; // Adjust the ray distance according to your needs
+        RaycastHit hit;
+
+        // Cast a ray in the player's forward direction
+        if (Physics.Raycast(transform.position, transform.forward, out hit, rayDistance))
+        {
+            wallNormal = hit.normal;
+            return true;
+        }
+
+        // Cast a ray to the right side of the player's forward direction
+        if (Physics.Raycast(transform.position, transform.right, out hit, rayDistance))
+        {
+            wallNormal = hit.normal;
+            return true;
+        }
+
+        // Cast a ray to the left side of the player's forward direction
+        if (Physics.Raycast(transform.position, -transform.right, out hit, rayDistance))
+        {
+            wallNormal = hit.normal;
+            return true;
+        }
+
+        Debug.DrawRay(transform.position, transform.right, Color.red);
+        wallNormal = Vector3.zero;
+        return false;
+    }
+
+
+    private void JumpOffWall()
+    {
+        // Perform a jump while wallrunning
+        jumpingForce = wallRunDirection * playerSettings.WallRunningJumpForce;
+        wallRunning = false;
+        characterController.enabled = true; // Enable character controller again
+    }
+
     private void CalculateAnimation()
     {
         if (!has_Animator) return;
@@ -436,6 +598,7 @@ public class scr_CharacterController : MonoBehaviour
         anim.SetBool(groundHash, grounded);
 
         anim.SetBool(crouchHash, crouched);
+        anim.SetBool(slideHash, sliding);
     }
 
     void ActivateRagdoll()

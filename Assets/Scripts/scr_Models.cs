@@ -9,7 +9,8 @@ public static class scr_Models
     public enum PlayerStance
     {
         Stand,
-        Crouch
+        Crouch,
+        Slide
     }
 
     [Serializable]
@@ -25,6 +26,17 @@ public static class scr_Models
         [Header("Movement - Settings")]
         public bool HoldSprint;
         public float MovementSmoothing;
+
+        [Header("Movement - Sliding")]
+        public float SlidingSpeed;
+        public float SlidingDuration;
+        public float SlidingCooldown;
+
+        [Header("Movement - WallRunning")]
+        public float WallRunningSpeed;
+        public float WallRunningDuration;
+        public float WallRunningGravity;
+        public float WallRunningJumpForce;
 
         [Header("Movement - Running")]
         public float RunningForwardSpeed;

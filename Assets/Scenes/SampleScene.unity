@@ -129,7 +129,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh32030
+  m_Name: pb_Mesh25440
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -765,7 +765,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh31856
+  m_Name: pb_Mesh25256
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5007,7 +5007,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh31894
+  m_Name: pb_Mesh25304
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7271,7 +7271,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh32016
+  m_Name: pb_Mesh25426
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7435,7 +7435,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh31782
+  m_Name: pb_Mesh25182
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -8797,6 +8797,7 @@ GameObject:
   - component: {fileID: 4860602771249769872}
   - component: {fileID: 4860602771249769878}
   - component: {fileID: 4860602771249769877}
+  - component: {fileID: 4860602771249769879}
   - component: {fileID: 4860602771249769874}
   - component: {fileID: 4860602771249769873}
   - component: {fileID: 4860602771249769876}
@@ -10300,6 +10301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ff467bf5cbc397479d1c7af35037900, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wallRunning: 0
   cameraRoot: {fileID: 77241373}
   camera: {fileID: 963194228}
   feetTransform: {fileID: 2019547040}
@@ -10310,6 +10312,13 @@ MonoBehaviour:
     ViewYInverted: 0
     HoldSprint: 1
     MovementSmoothing: 0.1
+    SlidingSpeed: 0
+    SlidingDuration: 1
+    SlidingCooldown: 2
+    WallRunningSpeed: 0
+    WallRunningDuration: 2
+    WallRunningGravity: 5
+    WallRunningJumpForce: 10
     RunningForwardSpeed: 10
     RunningStrafeSpeed: 8
     WalkingForwardSpeed: 5
@@ -10338,6 +10347,8 @@ MonoBehaviour:
     StanceCollider: {fileID: 4860602771249769878}
   playerCrouchStance:
     StanceCollider: {fileID: 4860602771249769877}
+  playerSlideStance:
+    StanceCollider: {fileID: 4860602771249769879}
 --- !u!143 &4860602771249769874
 CharacterController:
   m_ObjectHideFlags: 0
@@ -10476,6 +10487,20 @@ CapsuleCollider:
   m_Height: 1.8
   m_Direction: 1
   m_Center: {x: 0, y: 0.96, z: 0}
+--- !u!136 &4860602771249769879
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2224681526968364368}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.56, z: 0}
 --- !u!4 &4924314197407269033
 Transform:
   m_ObjectHideFlags: 0
