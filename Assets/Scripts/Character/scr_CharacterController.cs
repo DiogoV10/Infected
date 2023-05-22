@@ -26,6 +26,7 @@ public class scr_CharacterController : MonoBehaviour
 
     private bool has_Animator;
     private bool grounded;
+    private bool wasGrounded; // Check if the character was grounded in the previous frame
     private bool crouched;
     private bool sprinting;
     private bool hardLand;
@@ -40,6 +41,8 @@ public class scr_CharacterController : MonoBehaviour
     private int crouchHash;
 
     private float viewClampYMin;
+    private float fallTimer;
+
 
     [Header("References")]
     public Transform cameraRoot;
@@ -48,6 +51,8 @@ public class scr_CharacterController : MonoBehaviour
 
     [Header("Settings")]
     public PlayerSettingsModel playerSettings;
+
+    [Header("Other Settings")]
     [SerializeField] public float standViewClampYMin = -70;
     [SerializeField] public float crouchViewClampYMin = 5;
     [SerializeField] public float hardLandViewClampYMin = 70;
@@ -151,7 +156,26 @@ public class scr_CharacterController : MonoBehaviour
         else
         {
             CalculateMovement();
+            TrackFalling();
         }
+    }
+
+    private void TrackFalling()
+    {
+        if (characterController.isGrounded)
+        {
+            fallTimer = 0f;
+        }
+        else if (wasGrounded)
+        {
+            fallTimer = 0f;
+        }
+        else
+        {
+            fallTimer -= Time.fixedDeltaTime * 10;
+        }
+
+        wasGrounded = characterController.isGrounded;
     }
 
     private void LateUpdate()
@@ -222,7 +246,7 @@ public class scr_CharacterController : MonoBehaviour
 
         if (hardLand && landed) return;
 
-        if (characterController.velocity.y <= -10)
+        if (fallTimer <= -10)
         {
             hardLand = true;
         }
@@ -405,7 +429,7 @@ public class scr_CharacterController : MonoBehaviour
         else
         {
             grounded = false;
-            anim.SetFloat(zVelHash, characterController.velocity.y);
+            anim.SetFloat(zVelHash, fallTimer);
         }
 
         anim.SetBool(fallingHash, !grounded);

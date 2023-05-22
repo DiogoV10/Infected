@@ -32,7 +32,6 @@ public static class scr_Models
 
         [Header("Movement - Walking")]
         public float WalkingForwardSpeed;
-        public float WalkingBackwardSpeed;
         public float WalkingStrafeSpeed;
 
         [Header("Jumping")]
