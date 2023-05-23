@@ -330,7 +330,7 @@ GameObject:
   - component: {fileID: 164514760}
   - component: {fileID: 164514759}
   - component: {fileID: 164514758}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -429,7 +429,7 @@ GameObject:
   - component: {fileID: 174746458}
   - component: {fileID: 174746457}
   - component: {fileID: 174746456}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1119,7 +1119,7 @@ GameObject:
   - component: {fileID: 353172582}
   - component: {fileID: 353172581}
   - component: {fileID: 353172580}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1237,7 +1237,7 @@ GameObject:
   - component: {fileID: 439119249}
   - component: {fileID: 439119248}
   - component: {fileID: 439119247}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1423,6 +1423,37 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &469124470
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 469124471}
+  m_Layer: 7
+  m_Name: Orientation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &469124471
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469124470}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1555000413963614186}
+  m_RootOrder: 21
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &490460348
 GameObject:
   m_ObjectHideFlags: 0
@@ -1435,7 +1466,7 @@ GameObject:
   - component: {fileID: 490460351}
   - component: {fileID: 490460350}
   - component: {fileID: 490460349}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1534,7 +1565,7 @@ GameObject:
   - component: {fileID: 628999906}
   - component: {fileID: 628999905}
   - component: {fileID: 628999904}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Stairs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4725,7 +4756,7 @@ GameObject:
   - component: {fileID: 652452795}
   - component: {fileID: 652452794}
   - component: {fileID: 652452793}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -4822,7 +4853,7 @@ GameObject:
   - component: {fileID: 662971221}
   - component: {fileID: 662971220}
   - component: {fileID: 662971219}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5179,7 +5210,7 @@ GameObject:
   - component: {fileID: 808005218}
   - component: {fileID: 808005217}
   - component: {fileID: 808005216}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5503,7 +5534,7 @@ Transform:
   m_GameObject: {fileID: 808005215}
   m_LocalRotation: {x: 1.110223e-17, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 161.37566, y: -59.114086, z: -89.35179}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2115673462}
@@ -5893,7 +5924,7 @@ GameObject:
   - component: {fileID: 1413936687}
   - component: {fileID: 1413936686}
   - component: {fileID: 1413936685}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -5990,7 +6021,7 @@ GameObject:
   - component: {fileID: 1569215685}
   - component: {fileID: 1569215684}
   - component: {fileID: 1569215683}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6087,7 +6118,7 @@ GameObject:
   - component: {fileID: 1690082500}
   - component: {fileID: 1690082499}
   - component: {fileID: 1690082498}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6298,7 +6329,7 @@ GameObject:
   - component: {fileID: 1778443300}
   - component: {fileID: 1778443299}
   - component: {fileID: 1778443298}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6395,7 +6426,7 @@ GameObject:
   - component: {fileID: 1784297271}
   - component: {fileID: 1784297270}
   - component: {fileID: 1784297269}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6492,7 +6523,7 @@ GameObject:
   - component: {fileID: 1895237490}
   - component: {fileID: 1895237489}
   - component: {fileID: 1895237488}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6591,7 +6622,7 @@ GameObject:
   - component: {fileID: 1919184495}
   - component: {fileID: 1919184494}
   - component: {fileID: 1919184493}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6935,7 +6966,7 @@ GameObject:
   - component: {fileID: 1939195080}
   - component: {fileID: 1939195079}
   - component: {fileID: 1939195078}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8433,6 +8464,7 @@ Transform:
   - {fileID: 963194228}
   - {fileID: 1342085713}
   - {fileID: 2019547040}
+  - {fileID: 469124471}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10301,10 +10333,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ff467bf5cbc397479d1c7af35037900, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallRunning: 0
   cameraRoot: {fileID: 77241373}
   camera: {fileID: 963194228}
   feetTransform: {fileID: 2019547040}
+  orientation: {fileID: 469124471}
   playerSettings:
     ViewXSensitivity: 20
     ViewYSensitivity: 20
@@ -10312,13 +10344,15 @@ MonoBehaviour:
     ViewYInverted: 0
     HoldSprint: 1
     MovementSmoothing: 0.1
-    SlidingSpeed: 0
+    SlidingSpeed: 8
     SlidingDuration: 1
     SlidingCooldown: 2
-    WallRunningSpeed: 0
-    WallRunningDuration: 2
-    WallRunningGravity: 5
-    WallRunningJumpForce: 10
+    WallRunningSpeed: 10
+    WallRunningJumpHeightMin: 1
+    WallRunningJumpUpForce: 15
+    WallRunningJumpSideForce: 8
+    WallRunningCheckDistance: 0.7
+    WallRunningExitTime: 0.2
     RunningForwardSpeed: 10
     RunningStrafeSpeed: 8
     WalkingForwardSpeed: 5
@@ -10337,10 +10371,15 @@ MonoBehaviour:
   animBlendSpeed: 0.1
   playerMask:
     serializedVersion: 2
-    m_Bits: 1143
+    m_Bits: 1399
+  whatIsWall:
+    serializedVersion: 2
+    m_Bits: 256
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 1024
   gravity: 0.03
   gravityMin: -2
-  jumpingForce: {x: 0, y: 0, z: 0}
   playerStance: 0
   playerStanceSmoothing: 0.1
   playerStandStance:

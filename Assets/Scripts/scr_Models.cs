@@ -34,9 +34,11 @@ public static class scr_Models
 
         [Header("Movement - WallRunning")]
         public float WallRunningSpeed;
-        public float WallRunningDuration;
-        public float WallRunningGravity;
-        public float WallRunningJumpForce;
+        public float WallRunningJumpHeightMin;
+        public float WallRunningJumpUpForce;
+        public float WallRunningJumpSideForce;
+        public float WallRunningCheckDistance;
+        public float WallRunningExitTime;
 
         [Header("Movement - Running")]
         public float RunningForwardSpeed;
