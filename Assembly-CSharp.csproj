@@ -61,6 +61,9 @@
     <Compile Include="Assets\Inputs\DefaultInput.cs" />
     <Compile Include="Assets\Scripts\Character\scr_CharacterController.cs" />
     <Compile Include="Assets\Scripts\scr_Models.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Limb.cs" />
+    <Compile Include="Assets\Scripts\Enemies\ZombieAI.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
