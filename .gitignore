@@ -6,3 +6,9 @@ Library/ArtifactDB
 Library/ArtifactDB
 *.resS
 Library/PackageCache/com.unity.burst@1.6.6/.Runtime/hostmac/lld
+Library/Bee/tundra.log.json
+Library/SceneVisibilityState.asset
+Library/SourceAssetDB
+Logs/shadercompiler-UnityShaderCompiler.exe0.log
+Logs/AssetImportWorker0-prev.log
+Logs/AssetImportWorker1-prev.log

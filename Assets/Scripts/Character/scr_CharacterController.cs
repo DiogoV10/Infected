@@ -32,8 +32,8 @@ public class scr_CharacterController : MonoBehaviour
     private bool has_Animator;
     private bool grounded;
     private bool wasGrounded; // Check if the character was grounded in the previous frame
-    private bool crouched;
-    private bool sprinting;
+    public bool crouched;
+    public bool sprinting;
     private bool hardLand;
     private bool landed;
     private bool sliding;
