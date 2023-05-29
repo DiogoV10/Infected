@@ -5,25 +5,25 @@ using static scr_CharacterController;
 
 public class Sound : MonoBehaviour
 {
-    public AudioClip shootSound;
-    public LayerMask zombieMask;
+    [SerializeField] public AudioClip shootSound;
+    [SerializeField] public LayerMask zombieMask;
     private scr_CharacterController scrCC;
     private SphereCollider sphereCollider;
 
-    public float soundIntensity = 5f;
-    public float walkEnemyPerceptionRadius = 1f;
-    public float sprintEnemyPerceptionRadius = 1.5f;
+    [SerializeField] public float soundIntensity = 5f;
+    [SerializeField] public float walkEnemyPerceptionRadius = 1f;
+    [SerializeField] public float sprintEnemyPerceptionRadius = 1.5f;
 
     private AudioSource audioSource;
 
-    public void Start()
+    private void Start()
     {
         audioSource = GetComponent<AudioSource>();
         scrCC = GetComponent<scr_CharacterController>();
         sphereCollider = GetComponent<SphereCollider>();
     }
 
-    public void Update()
+    private void Update()
     {
         if (scrCC.crouched)
         {
@@ -40,7 +40,7 @@ public class Sound : MonoBehaviour
         }
     }
 
-    public void Fire()
+    private void Fire()
     {
         audioSource.PlayOneShot(shootSound);
         Collider[] zombies = Physics.OverlapSphere(transform.position, soundIntensity, zombieMask);
@@ -51,7 +51,7 @@ public class Sound : MonoBehaviour
         }
     }
 
-    public void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Enemy"))
         {

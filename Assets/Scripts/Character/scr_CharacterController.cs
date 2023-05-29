@@ -32,8 +32,8 @@ public class scr_CharacterController : MonoBehaviour
     private bool has_Animator;
     private bool grounded;
     private bool wasGrounded; // Check if the character was grounded in the previous frame
-    public bool crouched;
-    public bool sprinting;
+    public bool crouched { get; private set; }
+    public bool sprinting { get; private set; }
     private bool hardLand;
     private bool landed;
     private bool sliding;
@@ -59,15 +59,14 @@ public class scr_CharacterController : MonoBehaviour
     private float slideTimerCooldown;
     private float exitWallTimer;
 
-
-    [Header("References")]
-    public Transform cameraRoot;
-    public Transform camera;
-    public Transform feetTransform;
-    public Transform orientation;
+    [Header("References")] 
+    [SerializeField] public Transform cameraRoot;
+    [SerializeField] public Transform camera;
+    [SerializeField] public Transform feetTransform;
+    [SerializeField] public Transform orientation;
 
     [Header("Settings")]
-    public PlayerSettingsModel playerSettings;
+    [SerializeField] public PlayerSettingsModel playerSettings;
 
     [Header("Other Settings")]
     [SerializeField] public float standViewClampYMin = -70;
@@ -75,24 +74,24 @@ public class scr_CharacterController : MonoBehaviour
     [SerializeField] public float hardLandViewClampYMin = 70;
     [SerializeField] public float viewClampYMax = 80;
     [SerializeField] public float viewClampSmoothing = 10;
-    [SerializeField] private float animBlendSpeed = 0.1f;
-    public LayerMask playerMask;
-    public LayerMask whatIsWall;
-    public LayerMask whatIsGround;
+    private float animBlendSpeed = 0.1f;
+    [SerializeField] public LayerMask playerMask;
+    [SerializeField] public LayerMask whatIsWall;
+    [SerializeField] public LayerMask whatIsGround;
     //[SerializeField] private float rotationThreshold = 45f;
     //[SerializeField] private float rotationSpeed = 5;
 
     [Header("Gravity")]
-    public float gravity;
-    public float gravityMin;
+    [SerializeField] public float gravity;
+    [SerializeField] public float gravityMin;
     private float playerGravity;
 
     [Header("Stance")]
-    public PlayerStance playerStance;
-    public float playerStanceSmoothing;
-    public CharacterStance playerStandStance;
-    public CharacterStance playerCrouchStance;
-    public CharacterStance playerSlideStance;
+    [SerializeField] public PlayerStance playerStance;
+    [SerializeField] public float playerStanceSmoothing;
+    [SerializeField] public CharacterStance playerStandStance;
+    [SerializeField] public CharacterStance playerCrouchStance;
+    [SerializeField] public CharacterStance playerSlideStance;
     private float stanceCheckErrorMargin = 0.05f;
     private Vector3 stanceCapsuleCenterVelocity;
     private float stanceCapsuleHeightVelocity;
