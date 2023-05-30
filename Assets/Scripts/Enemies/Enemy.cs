@@ -8,6 +8,8 @@ public class Enemy : MonoBehaviour
 
     List<Rigidbody> ragdollRigids;
 
+    [SerializeField] public int health = 100;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +24,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (health <= 0) GetKilled();
     }
 
     void ActivateRagdoll()

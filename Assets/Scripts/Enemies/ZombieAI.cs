@@ -10,7 +10,9 @@ public class ZombieAI : MonoBehaviour
     private Animator anim;
 
     private bool isAware = false;
+    private bool isDetecting = false;
 
+    private float loseTimer = 0f;
     private int waypointIndex = 0;
 
     private Vector3 wanderPoint;
@@ -30,6 +32,7 @@ public class ZombieAI : MonoBehaviour
     [SerializeField] public float fov = 120f;
     [SerializeField] public float viewDistance = 10f;
     [SerializeField] public float wanderRadius = 5f;
+    [SerializeField] public float loseThreshold = 10f;
 
     // Start is called before the first frame update
     public void Start()
@@ -43,23 +46,39 @@ public class ZombieAI : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
-        if (anim == null) return;
+        if (anim == null || !anim.isActiveAndEnabled) 
+        {
+            agent.speed = 0;
+            return;
+        }
 
         if (isAware)
         {
             agent.SetDestination(scrCC.transform.position);
             anim.SetBool("Aware", true);
             agent.speed = chaseSpeed;
+
+            if (!isDetecting)
+            {
+                loseTimer += Time.deltaTime;
+
+                if (loseTimer >= loseThreshold)
+                {
+                    isAware = false;
+                    loseTimer = 0;
+                }
+            }
         }
         else
         {
-            SearchForPlayer();
             Wander();
             anim.SetBool("Aware", false);
             agent.speed = wanderSpeed;
         }
 
         anim.SetBool("Walking", true);
+
+        SearchForPlayer();
     }
 
     public void SearchForPlayer()
@@ -76,14 +95,32 @@ public class ZombieAI : MonoBehaviour
                     {
                         OnAware();
                     }
+                    else
+                    {
+                        isDetecting = false;
+                    }
+                }
+                else
+                {
+                    isDetecting = false;
                 }
             }
+            else
+            {
+                isDetecting = false;
+            }
+        }
+        else
+        {
+            isDetecting = false;
         }
     }
 
     public void OnAware()
     {
-        isAware= true;
+        isAware = true;
+        isDetecting = true;
+        loseTimer = 0;
     }
 
     public void Wander()
