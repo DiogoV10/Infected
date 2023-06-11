@@ -89,6 +89,15 @@ public partial class @DefaultInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""7aa8b63d-2ec3-4a5b-8141-c6e297b59863"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -212,6 +221,17 @@ public partial class @DefaultInput: IInputActionCollection2, IDisposable
                     ""action"": ""Slide"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4238d1dc-fb9b-405d-8036-b0669a9b9185"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -299,6 +319,7 @@ public partial class @DefaultInput: IInputActionCollection2, IDisposable
         m_Character_Sprint = m_Character.FindAction("Sprint", throwIfNotFound: true);
         m_Character_SprintReleased = m_Character.FindAction("SprintReleased", throwIfNotFound: true);
         m_Character_Slide = m_Character.FindAction("Slide", throwIfNotFound: true);
+        m_Character_Attack = m_Character.FindAction("Attack", throwIfNotFound: true);
         // AniMove
         m_AniMove = asset.FindActionMap("AniMove", throwIfNotFound: true);
         m_AniMove_Movement = m_AniMove.FindAction("Movement", throwIfNotFound: true);
@@ -370,6 +391,7 @@ public partial class @DefaultInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Character_Sprint;
     private readonly InputAction m_Character_SprintReleased;
     private readonly InputAction m_Character_Slide;
+    private readonly InputAction m_Character_Attack;
     public struct CharacterActions
     {
         private @DefaultInput m_Wrapper;
@@ -381,6 +403,7 @@ public partial class @DefaultInput: IInputActionCollection2, IDisposable
         public InputAction @Sprint => m_Wrapper.m_Character_Sprint;
         public InputAction @SprintReleased => m_Wrapper.m_Character_SprintReleased;
         public InputAction @Slide => m_Wrapper.m_Character_Slide;
+        public InputAction @Attack => m_Wrapper.m_Character_Attack;
         public InputActionMap Get() { return m_Wrapper.m_Character; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -411,6 +434,9 @@ public partial class @DefaultInput: IInputActionCollection2, IDisposable
             @Slide.started += instance.OnSlide;
             @Slide.performed += instance.OnSlide;
             @Slide.canceled += instance.OnSlide;
+            @Attack.started += instance.OnAttack;
+            @Attack.performed += instance.OnAttack;
+            @Attack.canceled += instance.OnAttack;
         }
 
         private void UnregisterCallbacks(ICharacterActions instance)
@@ -436,6 +462,9 @@ public partial class @DefaultInput: IInputActionCollection2, IDisposable
             @Slide.started -= instance.OnSlide;
             @Slide.performed -= instance.OnSlide;
             @Slide.canceled -= instance.OnSlide;
+            @Attack.started -= instance.OnAttack;
+            @Attack.performed -= instance.OnAttack;
+            @Attack.canceled -= instance.OnAttack;
         }
 
         public void RemoveCallbacks(ICharacterActions instance)
@@ -508,6 +537,7 @@ public partial class @DefaultInput: IInputActionCollection2, IDisposable
         void OnSprint(InputAction.CallbackContext context);
         void OnSprintReleased(InputAction.CallbackContext context);
         void OnSlide(InputAction.CallbackContext context);
+        void OnAttack(InputAction.CallbackContext context);
     }
     public interface IAniMoveActions
     {

@@ -1,0 +1,204 @@
+Using pre-set license
+Built from '2021.3/staging' branch; Version is '2021.3.21f1 (1b156197d683) revision 1774945'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 10  (10.0.19045) 64bit Core' Language: 'pt' Physical Memory: 8114 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2021.3.21f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker734
+-projectPath
+C:/Users/diogo/Desktop/School/DJA/Project/Infected
+-logFile
+Logs/AssetImportWorker734.log
+-srvPort
+57425
+Successfully changed project path to: C:/Users/diogo/Desktop/School/DJA/Project/Infected
+C:/Users/diogo/Desktop/School/DJA/Project/Infected
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Player connection [34284] Host "[IP] 192.168.1.70 [Port] 0 [Flags] 2 [Guid] 3648349063 [EditorId] 3648349063 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-KCRGQGH) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+
+Player connection [34284] Host "[IP] 192.168.1.70 [Port] 0 [Flags] 2 [Guid] 3648349063 [EditorId] 3648349063 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-KCRGQGH) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+
+mdb reader table full -> cleaning up stale readers. Current readers:
+    pid     thread     txnid
+      9968 2c28 -
+     29452 51f8 12523
+      9968 32b0 -
+      9968 519c -
+     25880 6c1c 12524
+     27756 3118 12525
+     31612 79b8 12526
+     28236 7274 12533
+     29312 4490 12534
+     32156 7da0 12541
+     32252 7e00 12542
+     31844 7c68 12556
+     24720 7ad4 12557
+     32672 7ecc 12558
+     32680 70cc 12559
+     31008 7cf4 12565
+     31976 7cf0 12566
+     30120 78bc 12567
+     32728 7cd8 12568
+     29952 7d3c 12569
+     32552 7ff4 12570
+     27048 77a8 12571
+     31064 7dd4 12572
+     32328 7edc 12573
+     29232 784c 12574
+     30424 7bdc 12575
+     32392 7db4 12576
+     29404 7ddc 12577
+     25776 7e44 12578
+     29120 7f38 12579
+     30104 77f8 12580
+       604 7de8 12585
+     29220 7768 12586
+     32000 72ac 12587
+     32340 7e5c 12590
+     31400 6f68 12595
+     32572 8150 12596
+     32952 80a4 12597
+     33168 6cc8 12598
+     15172 6390 12599
+     31244 7b24 12600
+     31324 7384 12601
+     32888 8074 12602
+     32980 2fcc 12605
+     32304 825c 12606
+     33464 700 12607
+     31212 7d8c 12608
+     31852 7e24 12609
+     31216 830c 12610
+     33208 81bc 12611
+     33116 83e4 12612
+     32448 7a70 12613
+     27164 8220 12614
+     33496 80f4 12615
+     32472 7ef8 12616
+     30544 7858 12621
+     30600 8040 12622
+     33200 7c10 12623
+     33564 82fc 12624
+     33036 801c 12625
+     30468 7b4 12626
+     31860 7ca4 12627
+     31192 82c0 12628
+     33560 8030 12630
+     28828 7b0c 12631
+     32072 6a58 12632
+     30696 728c 12633
+     31740 768c 12634
+     27736 7f10 12635
+     30496 821c 12636
+     31328 73c8 12637
+     31864 8028 12638
+     32676 81c0 12639
+     28712 74f4 12641
+     33860 8448 12642
+     34524 86e0 12645
+     34764 87d0 12646
+     34352 8634 12647
+     34548 8720 12648
+     30964 81dc 12657
+     32956 8690 12658
+     32300 827c 12659
+     32724 81c8 12675
+     33432 6ab8 12676
+     33000 869c 12677
+     30308 8440 12678
+     27472 797c 12679
+     34320 8628 12680
+     33988 8584 12681
+     33992 7ee8 12682
+     31356 7fe0 12683
+     10592 6ed4 12684
+     33968 7fb8 12685
+     29904 6e38 12686
+      4648 8640 12687
+     27476 806c 12697
+     34796 848c 12698
+     34072 7a1c 12704
+     35132 8940 12705
+     35824 8bf4 12707
+     35176 8964 12708
+      9968 a3c -
+      9640 7cf8 12714
+     32612 796c 12715
+     35372 8a30 12720
+     33056 7174 12721
+     34260 71ac 12722
+     31532 876c 12723
+     35420 8a58 12724
+     33908 8578 12725
+     35140 8528 12726
+     33840 8504 12727
+     32380 8354 12728
+     27924 84f8 12729
+     30264 89f4 12730
+     35100 7e9c 12731
+     35632 8af4 12732
+     34664 8a38 12733
+     35116 6a8c 12734
+     35108 1d5c 12735
+     35440 8a74 12736
+     34884 8a04 12737
+     34624 8134 12738
+     35756 6e10 12739
+     35564 8bbc 12740
+     32712 71d4 12741
+Cleaned out 122 stale readers
+received signal from system: SIGSEGV
+Obtained 19 stack frames
+0x00007ff6b119d1dd (Unity) StackWalker::GetCurrentCallstack
+0x00007ff6b11a3d99 (Unity) StackWalker::ShowCallstack
+0x00007ff6b213b913 (Unity) GetStacktrace
+0x00007ff6b11a2dd6 (Unity) winutils::PrintStackTrace
+0x00007ff6b119c80c (Unity) winutils::CrashHandler::DefaultSignalHandler
+0x00007ff6b3578b7e (Unity) seh_filter_exe
+0x00007ff6b363a4d8 (Unity) `__scrt_common_main_seh'::`1'::filt$0
+0x00007ff6b35454b0 (Unity) _C_specific_handler
+0x00007ff913dd23df (ntdll) _chkstk
+0x00007ff913d814a4 (ntdll) RtlRaiseException
+0x00007ff913dd0f0e (ntdll) KiUserExceptionDispatcher
+0x00007ff6b24c98e8 (Unity) SyncAssetFoldersWithDB
+0x00007ff6b24b70e5 (Unity) InitializeAssetDatabaseV2
+0x00007ff6b24380b5 (Unity) AssetDatabase::InitializeAssetDatabase
+0x00007ff6b1cdf13f (Unity) Application::InitializeProject
+0x00007ff6b2146078 (Unity) WinMain
+0x00007ff6b3522e1e (Unity) __scrt_common_main_seh
+0x00007ff913317614 (KERNEL32) BaseThreadInitThunk
+0x00007ff913d826a1 (ntdll) RtlUserThreadStart
+

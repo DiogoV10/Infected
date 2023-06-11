@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    Animator anim;
+    private Animator anim;
+    private CapsuleCollider capsuleCollider;
 
     List<Rigidbody> ragdollRigids;
 
@@ -14,6 +15,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
+        capsuleCollider = GetComponent<CapsuleCollider>();
 
         ragdollRigids = new List<Rigidbody>(transform.GetComponentsInChildren<Rigidbody>());
         ragdollRigids.Remove(GetComponent<Rigidbody>());
@@ -30,6 +32,7 @@ public class Enemy : MonoBehaviour
     void ActivateRagdoll()
     {
         anim.enabled = false;
+        capsuleCollider.enabled = false;
         for(int i = 0; i < ragdollRigids.Count; i++)
         {
             ragdollRigids[i].useGravity = true;
@@ -40,6 +43,7 @@ public class Enemy : MonoBehaviour
     void DeactivateRagdoll()
     {
         anim.enabled = true;
+        capsuleCollider.enabled = true;
         for (int i = 0; i < ragdollRigids.Count; i++)
         {
             ragdollRigids[i].useGravity = false;

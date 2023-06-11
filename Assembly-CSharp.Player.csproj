@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
     <Compile Include="Assets\Scripts\Character\scr_CharacterController.cs" />
     <Compile Include="Assets\Scripts\Enemies\Limb.cs" />
+    <Compile Include="Assets\Scripts\Weapons\CollisionDetection.cs" />
     <Compile Include="Assets\Scripts\Enemies\ZombieAI.cs" />
     <Compile Include="Assets\Scripts\scr_Models.cs" />
   </ItemGroup>

@@ -11,15 +11,21 @@ public class scr_CharacterController : MonoBehaviour
     List<Rigidbody> ragdollRigids;
 
     private CharacterController characterController;
+    private WeaponController weaponController;
+    private Sound sound;
     private DefaultInput defaultInput;
     private Animator anim;
 
     private RaycastHit leftWallHit;
     private RaycastHit rightWallHit;
 
-    private Vector2 input_Movement;
-    private Vector2 input_View;
+    public Vector2 input_Movement { get; private set; }
+    public Vector2 input_View { get; private set; }
     private Vector2 input_AniMove;
+
+    private Transform objectTransform;
+    private Vector3 previousPosition;
+    private Vector3 storedVelocity;
 
     private Vector3 newCameraRotation;
     private Vector3 newCharacterRotation;
@@ -27,10 +33,11 @@ public class scr_CharacterController : MonoBehaviour
     private Vector3 newMovementSpeedVelocity;
     private Vector3 jumpingForce;
     private Vector3 jumpingForceVelocity;
-    private Vector2 currentVelocity;
+    private Vector2 currentVelocityAnim;
 
     private bool has_Animator;
-    private bool grounded;
+    public bool grounded { get; private set; }
+    public bool falling { get; private set; }
     private bool wasGrounded; // Check if the character was grounded in the previous frame
     public bool crouched { get; private set; }
     public bool sprinting { get; private set; }
@@ -54,10 +61,10 @@ public class scr_CharacterController : MonoBehaviour
     private int wallRunRightHash;
 
     private float viewClampYMin;
-    private float fallTimer;
     private float slideTimer;
     private float slideTimerCooldown;
     private float exitWallTimer;
+    private float totalDistanceY;
 
     [Header("References")] 
     [SerializeField] public Transform cameraRoot;
@@ -76,6 +83,7 @@ public class scr_CharacterController : MonoBehaviour
     [SerializeField] public float viewClampSmoothing = 10;
     private float animBlendSpeed = 0.1f;
     [SerializeField] public LayerMask playerMask;
+    [SerializeField] public LayerMask groundMask;
     [SerializeField] public LayerMask whatIsWall;
     [SerializeField] public LayerMask whatIsGround;
     //[SerializeField] private float rotationThreshold = 45f;
@@ -95,6 +103,11 @@ public class scr_CharacterController : MonoBehaviour
     private float stanceCheckErrorMargin = 0.05f;
     private Vector3 stanceCapsuleCenterVelocity;
     private float stanceCapsuleHeightVelocity;
+
+    [Header("Weapon")]
+    [SerializeField] public float weaponAnimationSpeed;
+
+    #region - Awake -
 
     private void Awake()
     {
@@ -127,6 +140,11 @@ public class scr_CharacterController : MonoBehaviour
         newCharacterRotation = transform.localRotation.eulerAngles;
 
         characterController = GetComponent<CharacterController>();
+        weaponController = GetComponentInChildren<WeaponController>();
+        sound = GetComponent<Sound>();
+
+        weaponController.Initialize(defaultInput, this);
+        sound.Initialize(defaultInput);
     }
 
     private void HideCursor()
@@ -135,7 +153,10 @@ public class scr_CharacterController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    // Start is called before the first frame update
+    #endregion
+
+    #region - Start -
+
     private void Start()
     {
         has_Animator = TryGetComponent<Animator>(out anim);
@@ -151,13 +172,19 @@ public class scr_CharacterController : MonoBehaviour
         wallRunHash = Animator.StringToHash("WallRun");
         wallRunRightHash = Animator.StringToHash("WallRunRight");
 
+        objectTransform = transform;
+        previousPosition = objectTransform.position;
+
         ragdollRigids = new List<Rigidbody>(transform.GetComponentsInChildren<Rigidbody>());
         ragdollRigids.Remove(GetComponent<Rigidbody>());
 
         DeactivateRagdoll();
     }
 
-    // Update is called once per frame
+    #endregion
+
+    #region - Update -
+
     private void Update()
     {
         if (anim.enabled == false) return;
@@ -168,6 +195,8 @@ public class scr_CharacterController : MonoBehaviour
         }
         else
         {
+            SetIsGrounded();
+            SetIsFalling();
             CalculateAnimation();
             CalculateJump();
             CalculateStance();
@@ -189,53 +218,82 @@ public class scr_CharacterController : MonoBehaviour
         {
             CalculateWallRun();
             TrackFalling();
+            CalculateStoredVelocity();
         }
         else if (sliding)
         {
             CalculateSlide();
             TrackFalling();
+            CalculateStoredVelocity();
         }
         else
         {
             CalculateMovement();
             TrackFalling();
+            CalculateStoredVelocity();
         }
+    }
+
+    private void LateUpdate()
+        {
+            if (anim.enabled == false) return;
+
+            if (Time.deltaTime > 0.1f)
+            {
+                return;
+            }
+            else
+            {
+                CalculateView();
+            }
+        }
+
+    #endregion
+
+    #region - IsFalling / IsGrounded -
+
+    private void SetIsGrounded()
+    {
+        grounded = Physics.CheckSphere(feetTransform.position, playerSettings.isGroundedRadius, groundMask);
+    }
+
+    private void SetIsFalling()
+    {
+        falling = (!grounded && storedVelocity.magnitude >= playerSettings.isFallingSpeed);
+    }
+
+    #endregion
+
+    private void CalculateStoredVelocity()
+    {
+        Vector3 displacement = objectTransform.position - previousPosition;
+
+        storedVelocity = displacement / Time.deltaTime;
+
+        float verticalDistance = Mathf.Abs(displacement.y);
+        totalDistanceY += verticalDistance;
+
+        previousPosition = objectTransform.position;
     }
 
     private void TrackFalling()
     {
         if (!has_Animator) return;
 
-        if (characterController.isGrounded || wallRunning)
+        if (grounded || wallRunning)
         {
-            fallTimer = 0f;
+            totalDistanceY = 0f;
         }
         else if (wasGrounded)
         {
 
-            fallTimer = 0f;
-        }
-        else
-        {
-            fallTimer -= Time.fixedDeltaTime * 10;
+            totalDistanceY = 0f;
         }
 
-        wasGrounded = characterController.isGrounded;
+        wasGrounded = grounded;
     }
-
-    private void LateUpdate()
-    {
-        if (anim.enabled == false) return;
-
-        if (Time.deltaTime > 0.1f)
-        {
-            return;
-        }
-        else
-        {
-            CalculateView();
-        }
-    }
+    
+    #region - View / Movement -
 
     private void CalculateView()
     {
@@ -291,7 +349,7 @@ public class scr_CharacterController : MonoBehaviour
 
         if (hardLand && landed) return;
 
-        if (fallTimer <= -10)
+        if (totalDistanceY >= 8)
         {
             hardLand = true;
         }
@@ -323,6 +381,13 @@ public class scr_CharacterController : MonoBehaviour
             playerSettings.SpeedEffector = 1;
         }
 
+        weaponAnimationSpeed = storedVelocity.magnitude / (playerSettings.WalkingForwardSpeed * playerSettings.SpeedEffector);
+
+        if (weaponAnimationSpeed > 1)
+        {
+            weaponAnimationSpeed = 1;
+        }
+
         verticalSpeed *= playerSettings.SpeedEffector;
         horizontalSpeed *= playerSettings.SpeedEffector;
 
@@ -334,7 +399,7 @@ public class scr_CharacterController : MonoBehaviour
             playerGravity -= gravity * Time.fixedDeltaTime;
         }
 
-        if (playerGravity < -0.1 && characterController.isGrounded)
+        if (playerGravity < -0.1 && grounded)
         {
             playerGravity = -0.1f;
         }
@@ -344,6 +409,8 @@ public class scr_CharacterController : MonoBehaviour
 
         characterController.Move(movementSpeed);
     }
+
+    #endregion
 
     private void CalculateStance()
     {
@@ -362,6 +429,8 @@ public class scr_CharacterController : MonoBehaviour
         characterController.center = Vector3.SmoothDamp(characterController.center, currentStance.StanceCollider.center, ref stanceCapsuleCenterVelocity, playerStanceSmoothing);
     }
 
+    #region - Jump -
+
     private void CalculateJump()
     {
         if (!has_Animator) return;
@@ -373,7 +442,7 @@ public class scr_CharacterController : MonoBehaviour
     {
         if (!has_Animator) return;
 
-        if (!characterController.isGrounded) return;
+        if (!grounded) return;
 
         if (crouched)
         {
@@ -390,6 +459,9 @@ public class scr_CharacterController : MonoBehaviour
         anim.SetTrigger(jumpHash);
         jumpingForce = Vector3.up * playerSettings.JumpingHeight;
         playerGravity = 0;
+
+        weaponController.TriggerJump();
+
         anim.ResetTrigger(jumpHash);
     }
 
@@ -398,6 +470,8 @@ public class scr_CharacterController : MonoBehaviour
         jumpingForce = Vector3.up * playerSettings.JumpingHeight;
         anim.ResetTrigger(jumpHash);
     }
+
+    #endregion
 
     public void Landed()
     {
@@ -584,6 +658,8 @@ public class scr_CharacterController : MonoBehaviour
 
         jumpingForce = forceToApply;
         playerGravity = 0;
+
+        weaponController.TriggerJump();
     }
 
     private void CalculateAnimation()
@@ -592,24 +668,22 @@ public class scr_CharacterController : MonoBehaviour
 
         if (sprinting)
         {
-            currentVelocity.x = playerSettings.RunningStrafeSpeed * input_AniMove.x;
-            currentVelocity.y = playerSettings.RunningForwardSpeed * input_AniMove.y;
+            currentVelocityAnim.x = playerSettings.RunningStrafeSpeed * input_AniMove.x;
+            currentVelocityAnim.y = playerSettings.RunningForwardSpeed * input_AniMove.y;
 
         }
         else
         {
-            currentVelocity.x = playerSettings.WalkingStrafeSpeed * input_AniMove.x;
-            currentVelocity.y = playerSettings.WalkingForwardSpeed * input_AniMove.y;
+            currentVelocityAnim.x = playerSettings.WalkingStrafeSpeed * input_AniMove.x;
+            currentVelocityAnim.y = playerSettings.WalkingForwardSpeed * input_AniMove.y;
         }
 
-        anim.SetFloat(xVelHash, currentVelocity.x, animBlendSpeed, Time.deltaTime);
-        anim.SetFloat(yVelHash, currentVelocity.y, animBlendSpeed, Time.deltaTime);
+        anim.SetFloat(xVelHash, currentVelocityAnim.x, animBlendSpeed, Time.deltaTime);
+        anim.SetFloat(yVelHash, currentVelocityAnim.y, animBlendSpeed, Time.deltaTime);
 
-        if (characterController.isGrounded) grounded = true;
-        else
+        if (!grounded)
         {
-            grounded = false;
-            anim.SetFloat(zVelHash, fallTimer);
+            anim.SetFloat(zVelHash, totalDistanceY);
         }
 
         anim.SetBool(fallingHash, !grounded);
@@ -621,6 +695,18 @@ public class scr_CharacterController : MonoBehaviour
         anim.SetBool(wallRunHash, wallRunning);
         anim.SetBool(wallRunRightHash, wallRight);
     }
+
+
+    #region - Gizmos -
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(feetTransform.position, playerSettings.isGroundedRadius);
+    }
+
+    #endregion
+
+    #region - Ragdoll -
 
     void ActivateRagdoll()
     {
@@ -646,4 +732,6 @@ public class scr_CharacterController : MonoBehaviour
     {
         ActivateRagdoll();
     }
+
+    #endregion
 }

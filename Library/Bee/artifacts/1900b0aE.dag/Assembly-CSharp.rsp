@@ -371,6 +371,7 @@
 "Assets/Scripts/Enemies/ZombieAI.cs"
 "Assets/Scripts/scr_CameraPosition.cs"
 "Assets/Scripts/scr_Models.cs"
+"Assets/Scripts/Weapons/CollisionDetection.cs"
 "Assets/Scripts/Weapons/WeaponController.cs"
 -langversion:9.0
 

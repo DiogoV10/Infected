@@ -57,6 +57,10 @@ public static class scr_Models
         public float SpeedEffector = 1;
         public float CrouchSpeedEffector;
         public float FallingSpeedEffector;
+
+        [Header("Is Grounded")]
+        public float isGroundedRadius;
+        public float isFallingSpeed;
     }
 
     [Serializable]
@@ -64,6 +68,30 @@ public static class scr_Models
     public class CharacterStance
     {
         public CapsuleCollider StanceCollider;
+    }
+
+    #endregion
+
+    #region - Weapons -
+
+    [Serializable]
+    public class WeaponSettingsModel
+    {
+        [Header("Weapon Sway")]
+        public float SwayAmount;
+        public bool SwayYInverted;
+        public bool SwayXInverted;
+        public float SwaySmoothing;
+        public float SwayResetSmoothing;
+        public float SwayClampX;
+        public float SwayClampY;
+
+        [Header("Weapon Movement Sway")]
+        public float MovementSwayX;
+        public float MovementSwayY;
+        public bool MovementSwayYInverted;
+        public bool MovementSwayXInverted;
+        public float MovementSwaySmoothing;
     }
 
     #endregion
