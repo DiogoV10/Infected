@@ -15,7 +15,7 @@ C:/Users/diogo/Desktop/School/DJA/Project/Infected
 -logFile
 Logs/AssetImportWorker3.log
 -srvPort
-61492
+53131
 Successfully changed project path to: C:/Users/diogo/Desktop/School/DJA/Project/Infected
 C:/Users/diogo/Desktop/School/DJA/Project/Infected
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
@@ -47,9 +47,9 @@ C:/Users/diogo/Desktop/School/DJA/Project/Infected
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [12816] Host "[IP] 192.168.1.70 [Port] 0 [Flags] 2 [Guid] 4120097863 [EditorId] 4120097863 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-KCRGQGH) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+Player connection [11456] Host "[IP] 192.168.1.70 [Port] 0 [Flags] 2 [Guid] 1364210842 [EditorId] 1364210842 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-KCRGQGH) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
 
-Player connection [12816] Host "[IP] 192.168.1.70 [Port] 0 [Flags] 2 [Guid] 4120097863 [EditorId] 4120097863 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-KCRGQGH) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [11456] Host "[IP] 192.168.1.70 [Port] 0 [Flags] 2 [Guid] 1364210842 [EditorId] 1364210842 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-KCRGQGH) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
 
 received signal from system: SIGSEGV
 Obtained 19 stack frames

@@ -1,0 +1,75 @@
+Using pre-set license
+Built from '2021.3/staging' branch; Version is '2021.3.21f1 (1b156197d683) revision 1774945'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 10  (10.0.19045) 64bit Core' Language: 'pt' Physical Memory: 7883 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2021.3.21f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker75
+-projectPath
+C:/Users/ASUS/Documents/GitHub/Infected
+-logFile
+Logs/AssetImportWorker75.log
+-srvPort
+58829
+Successfully changed project path to: C:/Users/ASUS/Documents/GitHub/Infected
+C:/Users/ASUS/Documents/GitHub/Infected
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Player connection [21376] Host "[IP] 192.168.1.80 [Port] 0 [Flags] 2 [Guid] 169948956 [EditorId] 169948956 [Version] 1048832 [Id] WindowsEditor(7,LAPTOP-0BTTP3I5) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+
+Player connection [21376] Host "[IP] 192.168.1.80 [Port] 0 [Flags] 2 [Guid] 169948956 [EditorId] 169948956 [Version] 1048832 [Id] WindowsEditor(7,LAPTOP-0BTTP3I5) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+
+received signal from system: SIGSEGV
+Obtained 19 stack frames
+0x00007ff63aabd1dd (Unity) StackWalker::GetCurrentCallstack
+0x00007ff63aac3d99 (Unity) StackWalker::ShowCallstack
+0x00007ff63ba5b913 (Unity) GetStacktrace
+0x00007ff63aac2dd6 (Unity) winutils::PrintStackTrace
+0x00007ff63aabc80c (Unity) winutils::CrashHandler::DefaultSignalHandler
+0x00007ff63ce98b7e (Unity) seh_filter_exe
+0x00007ff63cf5a4d8 (Unity) `__scrt_common_main_seh'::`1'::filt$0
+0x00007ff63ce654b0 (Unity) _C_specific_handler
+0x00007ffcc35123df (ntdll) _chkstk
+0x00007ffcc34c14a4 (ntdll) RtlRaiseException
+0x00007ffcc3510f0e (ntdll) KiUserExceptionDispatcher
+0x00007ff63bde98e8 (Unity) SyncAssetFoldersWithDB
+0x00007ff63bdd70e5 (Unity) InitializeAssetDatabaseV2
+0x00007ff63bd580b5 (Unity) AssetDatabase::InitializeAssetDatabase
+0x00007ff63b5ff13f (Unity) Application::InitializeProject
+0x00007ff63ba66078 (Unity) WinMain
+0x00007ff63ce42e1e (Unity) __scrt_common_main_seh
+0x00007ffcc1d07614 (KERNEL32) BaseThreadInitThunk
+0x00007ffcc34c26a1 (ntdll) RtlUserThreadStart
+
