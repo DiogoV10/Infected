@@ -62,6 +62,7 @@
     <Compile Include="Assets\Inputs\DefaultInput.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
     <Compile Include="Assets\Scripts\Character\scr_CharacterController.cs" />
+    <Compile Include="Assets\Scripts\Wave\WaveSpawner.cs" />
     <Compile Include="Assets\Scripts\Enemies\Limb.cs" />
     <Compile Include="Assets\Scripts\Weapons\CollisionDetection.cs" />
     <Compile Include="Assets\Scripts\Enemies\ZombieAI.cs" />

@@ -2,24 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using static scr_CharacterController;
 
 public class ZombieAI : MonoBehaviour
 {
     private NavMeshAgent agent;
     private Animator anim;
+    private scr_CharacterController scrCC;
 
     private bool isAware = false;
+    private bool isAlwaysAware = false;
     private bool isDetecting = false;
+
+    [Range(0f, 1f)] private float awareChance = 0.5f;
+    [Range(0f, 1f)] private float alwaysAwareChance = 0.90f;
 
     private float loseTimer = 0f;
     private int waypointIndex = 0;
 
     private Vector3 wanderPoint;
-
-
-    [Header("References")]
-    [SerializeField] public scr_CharacterController scrCC;
 
     [SerializeField] public enum WanderType { Random, Waypoint };
     [Header("Wander")]
@@ -37,10 +37,21 @@ public class ZombieAI : MonoBehaviour
     // Start is called before the first frame update
     public void Start()
     {
+        scrCC = GameObject.Find("Player").GetComponent<scr_CharacterController>();
+
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
 
         wanderPoint = RandomWanderPoint();
+
+        if (Random.value <= alwaysAwareChance)
+        {
+            isAlwaysAware = true;
+            OnAware();
+        }else if (Random.value <= awareChance)
+        {
+            OnAware();
+        }
     }
 
     // Update is called once per frame
@@ -78,7 +89,10 @@ public class ZombieAI : MonoBehaviour
 
         anim.SetBool("Walking", true);
 
-        SearchForPlayer();
+        if (!isAlwaysAware)
+        {
+            SearchForPlayer();
+        }
     }
 
     public void SearchForPlayer()
@@ -155,11 +169,32 @@ public class ZombieAI : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("Please assign more than 1 waypoint to tge AI: " + gameObject.name);
+                CreateRandomWaypoints();
             }
         }
+    }
 
-        
+    public void CreateRandomWaypoints()
+    {
+        int numWaypoints = Random.Range(2, 11);
+
+        Transform[] newWaypoints = new Transform[numWaypoints];
+
+        for (int i = 0; i < waypoints.Length; i++)
+        {
+            newWaypoints[i] = waypoints[i];
+        }
+
+        for (int i = waypoints.Length; i < numWaypoints; i++)
+        {
+            Vector3 randomPoint = RandomWanderPoint();
+            GameObject waypointObj = new GameObject("Waypoint");
+            waypointObj.transform.position = randomPoint;
+            newWaypoints[i] = waypointObj.transform;
+        }
+
+        waypoints = newWaypoints;
+        waypointIndex = 0;
     }
 
     public Vector3 RandomWanderPoint()

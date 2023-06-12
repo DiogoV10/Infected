@@ -15,7 +15,7 @@ C:/Users/diogo/Desktop/School/DJA/Project/Infected
 -logFile
 Logs/AssetImportWorker1349.log
 -srvPort
-57425
+61492
 Successfully changed project path to: C:/Users/diogo/Desktop/School/DJA/Project/Infected
 C:/Users/diogo/Desktop/School/DJA/Project/Infected
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
@@ -47,158 +47,29 @@ C:/Users/diogo/Desktop/School/DJA/Project/Infected
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [49172] Host "[IP] 192.168.1.70 [Port] 0 [Flags] 2 [Guid] 4285385311 [EditorId] 4285385311 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-KCRGQGH) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+Player connection [39988] Host "[IP] 192.168.1.70 [Port] 0 [Flags] 2 [Guid] 22559847 [EditorId] 22559847 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-KCRGQGH) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
 
-Player connection [49172] Host "[IP] 192.168.1.70 [Port] 0 [Flags] 2 [Guid] 4285385311 [EditorId] 4285385311 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-KCRGQGH) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [39988] Host "[IP] 192.168.1.70 [Port] 0 [Flags] 2 [Guid] 22559847 [EditorId] 22559847 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-KCRGQGH) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
 
-mdb reader table full -> cleaning up stale readers. Current readers:
-    pid     thread     txnid
-      9968 2c28 -
-     47288 b97c 13630
-      9968 32b0 -
-      9968 519c -
-     44996 b8a4 13631
-     46944 9e70 13632
-     46300 91c8 13633
-     38464 a16c 13634
-     45728 ba88 13635
-     48116 acf8 13636
-     37960 a228 13637
-     44716 b6c4 13638
-     47700 b648 13639
-     44476 b920 13640
-     47684 b99c 13641
-     46872 b7b8 13642
-     48000 a3e4 13643
-     44344 af80 13644
-     47060 aeec 13645
-     45128 b8cc 13646
-     47792 b8d8 13647
-     46348 b1bc 13648
-     46660 a84c 13649
-     44676 b684 13650
-     45548 b210 13651
-     47168 b924 13652
-     44276 b508 13653
-     37092 af2c 13654
-     44016 b7bc 13655
-     44908 afd8 13656
-     47136 aef0 13657
-     44416 b0d8 13658
-     46956 adcc 13659
-     46212 f0 13660
-     44788 a66c 13661
-     10712 1cdc 13662
-     39000 ba78 13663
-     47652 1248 13664
-     45508 9c58 13665
-     43472 99c0 13666
-     47768 b9f8 13667
-     47468 bad0 13668
-     47612 b9dc 13669
-     45820 aee8 13670
-     47364 992c 13671
-     47952 5550 13672
-     48028 ad10 13673
-     39312 b9c4 13674
-     34996 9fd0 13675
-     39684 8e08 13676
-     47856 b220 13677
-     45072 b81c 13678
-     46540 bb3c 13679
-     45352 ba74 13680
-     44456 b6d8 13681
-     44600 b560 13682
-     40944 b860 13683
-     46420 bb38 13684
-     44964 8cbc 13685
-     45576 b880 13686
-     39924 a7a4 13687
-     45544 b994 13688
-     41920 ba50 13689
-     43196 ab90 13690
-     47848 8ab0 13691
-     40592 b678 13692
-     47220 b690 13693
-     48176 bc34 13694
-     48444 bd40 13695
-     48644 be08 13696
-     47672 b5dc 13697
-     45392 ae98 13698
-     48880 be2c 13699
-     49132 ba94 13700
-     48792 bdd4 13701
-     46256 bdc4 13702
-     43924 b7cc 13703
-     48636 b03c 13704
-     43436 bdbc 13705
-     47996 b3f8 13706
-     44236 be1c 13707
-     48720 9ae0 13708
-     48528 b320 13709
-     43300 9e28 13710
-     48184 93fc 13711
-     46332 b0e0 13712
-     42400 bc7c 13713
-     48856 bcbc 13714
-     39932 bdd0 13715
-     46876 bc10 13716
-     48092 b88c 13717
-     43456 576c 13718
-     43704 b720 13719
-     22252 aff0 13720
-     46592 b9c0 13721
-     38224 b018 13722
-     48808 bdd8 13723
-     44796 aa0c 13724
-     45252 a018 13725
-     47692 b19c 13726
-     42020 bda0 13727
-     44744 b328 13728
-     48604 9d58 13729
-     42564 bc98 13730
-     48532 b438 13731
-     49124 9afc 13732
-     48932 bca8 13733
-     41980 68fc 13734
-     49032 a748 13735
-     45340 ba20 13736
-     48140 af0 13737
-     48900 b728 13738
-     49108 bc18 13739
-     48788 bb6c 13740
-     47948 bac4 13741
-     46040 a660 13742
-     43140 bc6c 13743
-     44648 ac3c 13744
-     46172 b67c 13745
-     39604 a830 13746
-     43796 bf50 13747
-     48864 a674 13748
-     44880 be6c 13749
-     32964 bf00 13750
-     42572 bee4 13751
-     48312 a468 13752
-Cleaned out 123 stale readers
 received signal from system: SIGSEGV
 Obtained 19 stack frames
-0x00007ff6b119d1dd (Unity) StackWalker::GetCurrentCallstack
-0x00007ff6b11a3d99 (Unity) StackWalker::ShowCallstack
-0x00007ff6b213b913 (Unity) GetStacktrace
-0x00007ff6b11a2dd6 (Unity) winutils::PrintStackTrace
-0x00007ff6b119c80c (Unity) winutils::CrashHandler::DefaultSignalHandler
-0x00007ff6b3578b7e (Unity) seh_filter_exe
-0x00007ff6b363a4d8 (Unity) `__scrt_common_main_seh'::`1'::filt$0
-0x00007ff6b35454b0 (Unity) _C_specific_handler
-0x00007ff913dd23df (ntdll) _chkstk
-0x00007ff913d814a4 (ntdll) RtlRaiseException
-0x00007ff913dd0f0e (ntdll) KiUserExceptionDispatcher
-0x00007ff6b24c98e8 (Unity) SyncAssetFoldersWithDB
-0x00007ff6b24b70e5 (Unity) InitializeAssetDatabaseV2
-0x00007ff6b24380b5 (Unity) AssetDatabase::InitializeAssetDatabase
-0x00007ff6b1cdf13f (Unity) Application::InitializeProject
-0x00007ff6b2146078 (Unity) WinMain
-0x00007ff6b3522e1e (Unity) __scrt_common_main_seh
-0x00007ff913317614 (KERNEL32) BaseThreadInitThunk
-0x00007ff913d826a1 (ntdll) RtlUserThreadStart
+0x00007ff730a8d1dd (Unity) StackWalker::GetCurrentCallstack
+0x00007ff730a93d99 (Unity) StackWalker::ShowCallstack
+0x00007ff731a2b913 (Unity) GetStacktrace
+0x00007ff730a92dd6 (Unity) winutils::PrintStackTrace
+0x00007ff730a8c80c (Unity) winutils::CrashHandler::DefaultSignalHandler
+0x00007ff732e68b7e (Unity) seh_filter_exe
+0x00007ff732f2a4d8 (Unity) `__scrt_common_main_seh'::`1'::filt$0
+0x00007ff732e354b0 (Unity) _C_specific_handler
+0x00007ffdebe923df (ntdll) _chkstk
+0x00007ffdebe414a4 (ntdll) RtlRaiseException
+0x00007ffdebe90f0e (ntdll) KiUserExceptionDispatcher
+0x00007ff731db98e8 (Unity) SyncAssetFoldersWithDB
+0x00007ff731da70e5 (Unity) InitializeAssetDatabaseV2
+0x00007ff731d280b5 (Unity) AssetDatabase::InitializeAssetDatabase
+0x00007ff7315cf13f (Unity) Application::InitializeProject
+0x00007ff731a36078 (Unity) WinMain
+0x00007ff732e12e1e (Unity) __scrt_common_main_seh
+0x00007ffdeb8d7614 (KERNEL32) BaseThreadInitThunk
+0x00007ffdebe426a1 (ntdll) RtlUserThreadStart
 

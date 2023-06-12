@@ -54,5 +54,10 @@ public class Enemy : MonoBehaviour
     public void GetKilled()
     {
         ActivateRagdoll();
+
+        if (GameObject.FindGameObjectWithTag("WaveSpawner") != null)
+        {
+            GameObject.FindGameObjectWithTag("WaveSpawner").GetComponent<WaveSpawner>().spawnedEnemies.Remove(gameObject);
+        }
     }
 }
