@@ -68,7 +68,7 @@ public class scr_CharacterController : MonoBehaviour
 
     [Header("References")] 
     [SerializeField] public Transform cameraRoot;
-    [SerializeField] public Transform camera;
+    [SerializeField] public new Transform camera;
     [SerializeField] public Transform feetTransform;
     [SerializeField] public Transform orientation;
 
@@ -144,7 +144,6 @@ public class scr_CharacterController : MonoBehaviour
         sound = GetComponent<Sound>();
 
         weaponController.Initialize(defaultInput, this);
-        sound.Initialize(defaultInput);
     }
 
     private void HideCursor()

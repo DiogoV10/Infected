@@ -34,6 +34,14 @@ public class ZombieAI : MonoBehaviour
     [SerializeField] public float wanderRadius = 5f;
     [SerializeField] public float loseThreshold = 10f;
 
+    [Header("Attack")]
+    [SerializeField] public float attackRange = 1.5f;
+    [SerializeField] public float attackCooldown = 2f;
+    private bool isAttacking = false;
+    private float attackTimer = 0f;
+    private bool isDelayingAttack = false;
+    private bool hasHitPlayer = false;
+
     // Start is called before the first frame update
     public void Start()
     {
@@ -79,6 +87,15 @@ public class ZombieAI : MonoBehaviour
                     loseTimer = 0;
                 }
             }
+
+            if (Vector3.Distance(transform.position, scrCC.transform.position) <= attackRange && !isAttacking)
+            {
+                StartAttackDelay();
+            }
+            else if(Vector3.Distance(transform.position, scrCC.transform.position) > attackRange && isAttacking)
+            {
+                isAttacking = false;
+            }
         }
         else
         {
@@ -93,6 +110,34 @@ public class ZombieAI : MonoBehaviour
         {
             SearchForPlayer();
         }
+
+        // Update attack cooldown
+        if (isAttacking)
+        {
+            attackTimer += Time.deltaTime;
+            if (attackTimer >= attackCooldown)
+            {
+                isAttacking = false;
+                attackTimer = 0f;
+            }
+        }
+    }
+
+    public void StartAttackDelay()
+    {
+        if (!isDelayingAttack)
+        {
+            float attackDelay = Random.Range(0f, .5f); // Adjust the range as needed
+            StartCoroutine(AttackDelayCoroutine(attackDelay));
+        }
+    }
+
+    private IEnumerator AttackDelayCoroutine(float delay)
+    {
+        isDelayingAttack = true;
+        yield return new WaitForSeconds(delay);
+        AttackPlayer();
+        isDelayingAttack = false;
     }
 
     public void SearchForPlayer()
@@ -206,5 +251,32 @@ public class ZombieAI : MonoBehaviour
         NavMesh.SamplePosition(randomPoint, out navHit, wanderRadius, -1);
 
         return new Vector3(navHit.position.x, transform.position.y, navHit.position.z);
+    }
+
+    public void AttackPlayer()
+    {
+        if (!isAttacking)
+        {
+            // Trigger attack animation
+            anim.SetTrigger("Attack");
+            isAttacking = true;
+        }
+    }
+
+    public void ResetAttack()
+    {
+        hasHitPlayer = false;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (isAttacking && other.CompareTag("Player") && !hasHitPlayer)
+        {
+            // Perform actions when the zombie hits the player
+            // For example, you can decrease the player's health or trigger a game over condition.
+            Debug.Log("Zombie hit the player!");
+
+            hasHitPlayer = true;
+        }
     }
 }

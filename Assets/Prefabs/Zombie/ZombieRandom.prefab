@@ -2012,6 +2012,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7e1693b605ec8446b93a6cec8e1b1a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathMaterial: {fileID: 2100000, guid: 62147a93df1f79d4e91d8903e5dd76ab, type: 2}
   health: 100
 --- !u!114 &8330762115575834265
 MonoBehaviour:

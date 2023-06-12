@@ -7,9 +7,8 @@ public class Sound : MonoBehaviour
     [SerializeField] public AudioClip shootSound;
     [SerializeField] public LayerMask zombieMask;
     private scr_CharacterController scrCC;
-    private WeaponController weaponController;
+    //private WeaponController weaponController;
     private SphereCollider sphereCollider;
-    private DefaultInput defaultInput;
 
     [SerializeField] public float soundIntensity = 5f;
     [SerializeField] public float walkEnemyPerceptionRadius = 1f;
@@ -17,19 +16,12 @@ public class Sound : MonoBehaviour
 
     private AudioSource audioSource;
 
-    public void Initialize(DefaultInput input)
-    {
-        defaultInput = input;
-
-        //defaultInput.Character.Attack.performed += e => Attack();
-    }
-
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
         scrCC = GetComponent<scr_CharacterController>();
         sphereCollider = GetComponent<SphereCollider>();
-        weaponController = GetComponentInChildren<WeaponController>();
+        //weaponController = GetComponentInChildren<WeaponController>();
     }
 
     private void Update()
