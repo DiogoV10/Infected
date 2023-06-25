@@ -13,6 +13,7 @@ public class scr_CharacterController : MonoBehaviour
     private CharacterController characterController;
     private WeaponController weaponController;
     private Sound sound;
+    private PlayerStats playerStats;
     private DefaultInput defaultInput;
     private Animator anim;
 
@@ -142,8 +143,10 @@ public class scr_CharacterController : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         weaponController = GetComponentInChildren<WeaponController>();
         sound = GetComponent<Sound>();
+        playerStats = GetComponent<PlayerStats>();
 
         weaponController.Initialize(defaultInput, this);
+        playerStats.Initialize(this);
     }
 
     private void HideCursor()
@@ -461,11 +464,14 @@ public class scr_CharacterController : MonoBehaviour
 
         weaponController.TriggerJump();
 
+        FindObjectOfType<AudioManager>().PlaySound("Hoa1");
+
         anim.ResetTrigger(jumpHash);
     }
 
     public void JumpAddForce()
     {
+        FindObjectOfType<AudioManager>().PlaySound("Hoa1");
         jumpingForce = Vector3.up * playerSettings.JumpingHeight;
         anim.ResetTrigger(jumpHash);
     }
@@ -648,6 +654,8 @@ public class scr_CharacterController : MonoBehaviour
 
     private void WallJump()
     {
+        FindObjectOfType<AudioManager>().PlaySound("Hoa1");
+
         exitingWall = true;
         exitWallTimer = playerSettings.WallRunningExitTime;
 

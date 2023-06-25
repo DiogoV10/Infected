@@ -8,6 +8,7 @@ public class ZombieAI : MonoBehaviour
     private NavMeshAgent agent;
     private Animator anim;
     private scr_CharacterController scrCC;
+    private PlayerStats playerStats;
 
     private bool isAware = false;
     private bool isAlwaysAware = false;
@@ -46,6 +47,8 @@ public class ZombieAI : MonoBehaviour
     public void Start()
     {
         scrCC = GameObject.Find("Player").GetComponent<scr_CharacterController>();
+
+        playerStats = GameObject.Find("Player").GetComponent<PlayerStats>();
 
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
@@ -105,6 +108,8 @@ public class ZombieAI : MonoBehaviour
         }
 
         anim.SetBool("Walking", true);
+
+        //FindObjectOfType<AudioManager>().PlaySound("ZombieChase");
 
         if (!isAlwaysAware)
         {
@@ -276,6 +281,9 @@ public class ZombieAI : MonoBehaviour
             // For example, you can decrease the player's health or trigger a game over condition.
             Debug.Log("Zombie hit the player!");
 
+            playerStats.Health();
+
+            FindObjectOfType<AudioManager>().PlaySound("ZombieAttack");
             hasHitPlayer = true;
         }
     }
